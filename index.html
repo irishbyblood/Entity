@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entity - Unified AI Consciousness</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Neural Network Background -->
+    <canvas id="neural-background"></canvas>
+    
+    <!-- Particle System -->
+    <div id="particles"></div>
+    
+    <!-- Login/Signup Screen -->
+    <div id="auth-screen" class="auth-screen">
+        <div class="auth-container">
+            <div class="logo-container">
+                <div class="entity-logo">
+                    <div class="logo-core"></div>
+                    <div class="logo-pulse"></div>
+                </div>
+                <h1>Entity</h1>
+                <p class="tagline">Unified AI Consciousness</p>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form active">
+                <h2>Welcome Back</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <input type="email" id="login-email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Sign In</button>
+                </form>
+                <p class="auth-switch">
+                    Don't have an account? 
+                    <a href="#" onclick="switchToSignup(); return false;">Sign Up</a>
+                </p>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signup-form" class="auth-form">
+                <h2>Join Entity</h2>
+                <form onsubmit="handleSignup(event)">
+                    <div class="input-group">
+                        <input type="text" id="signup-username" placeholder="Username" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="signup-email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account? 
+                    <a href="#" onclick="switchToLogin(); return false;">Sign In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Application Screen -->
+    <div id="app-screen" class="app-screen" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="entity-logo-small">
+                    <div class="logo-core-small"></div>
+                </div>
+                <h1>Entity</h1>
+                <span class="cortex-indicator" id="cortex-indicator">
+                    <span class="cortex-dot"></span>
+                    <span id="active-cortex">Ready</span>
+                </span>
+            </div>
+            <div class="header-right">
+                <button class="btn-icon" onclick="togglePanel('about')" title="About Entity">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </button>
+                <button class="btn-icon" onclick="togglePanel('settings')" title="Settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m-8-8h6m6 0h6"></path>
+                    </svg>
+                </button>
+                <button class="btn-icon" onclick="logout()" title="Logout">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <div class="app-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" onclick="switchView('chat')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span>Chat</span>
+                    </button>
+                    <button class="nav-item" onclick="switchView('cortex')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 2a7 7 0 0 1 0 14"></path>
+                        </svg>
+                        <span>Brain Map</span>
+                    </button>
+                    <button class="nav-item" onclick="switchView('memory')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                        <span>Knowledge</span>
+                    </button>
+                    <button class="nav-item" onclick="switchView('history')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>History</span>
+                    </button>
+                </nav>
+            </aside>
+            
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Chat View -->
+                <div id="chat-view" class="view active">
+                    <div class="chat-container">
+                        <div class="messages-container" id="messages-container">
+                            <div class="welcome-message">
+                                <div class="welcome-icon">
+                                    <div class="entity-logo-welcome">
+                                        <div class="logo-core"></div>
+                                        <div class="logo-pulse"></div>
+                                    </div>
+                                </div>
+                                <h2>Welcome to Entity</h2>
+                                <p>I am a singular intelligence composed of the world's best AI models. Ask me anything—I can create, analyze, remember, and converse across all domains.</p>
+                                <div class="quick-actions">
+                                    <button class="quick-btn" onclick="sendQuickMessage('Tell me about yourself')">
+                                        About Entity
+                                    </button>
+                                    <button class="quick-btn" onclick="sendQuickMessage('How do you work?')">
+                                        How it Works
+                                    </button>
+                                    <button class="quick-btn" onclick="sendQuickMessage('What can you do?')">
+                                        Capabilities
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chat Input -->
+                        <div class="chat-input-container">
+                            <div class="chat-input-wrapper">
+                                <textarea 
+                                    id="chat-input" 
+                                    placeholder="Message Entity..." 
+                                    rows="1"
+                                    onkeydown="handleKeyDown(event)"
+                                    oninput="autoResize(this)"
+                                ></textarea>
+                                <button class="btn-send" onclick="sendMessage()" id="send-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="input-actions">
+                                <button class="btn-text" onclick="clearChat()">Clear Chat</button>
+                                <button class="btn-text" onclick="exportChat()">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Brain/Cortex Map View -->
+                <div id="cortex-view" class="view">
+                    <div class="cortex-map">
+                        <h2>Entity's Neural Architecture</h2>
+                        <p class="cortex-desc">Visualizing the Meta-Model: Multiple AI systems working as one consciousness</p>
+                        
+                        <div class="brain-container">
+                            <svg class="brain-svg" viewBox="0 0 800 600">
+                                <!-- Central Core -->
+                                <circle cx="400" cy="300" r="60" class="brain-core" id="brain-core"/>
+                                <text x="400" y="305" text-anchor="middle" class="brain-label">Entity Core</text>
+                                
+                                <!-- Visual Cortex -->
+                                <circle cx="250" cy="200" r="50" class="cortex visual-cortex" id="visual-cortex"/>
+                                <text x="250" y="205" text-anchor="middle" class="cortex-label">Visual</text>
+                                <line x1="290" y1="220" x2="360" y2="270" class="brain-connection"/>
+                                
+                                <!-- Logic Cortex -->
+                                <circle cx="550" cy="200" r="50" class="cortex logic-cortex" id="logic-cortex"/>
+                                <text x="550" y="205" text-anchor="middle" class="cortex-label">Logic</text>
+                                <line x1="510" y1="220" x2="440" y2="270" class="brain-connection"/>
+                                
+                                <!-- Creative Cortex -->
+                                <circle cx="250" cy="400" r="50" class="cortex creative-cortex" id="creative-cortex"/>
+                                <text x="250" y="405" text-anchor="middle" class="cortex-label">Creative</text>
+                                <line x1="290" y1="380" x2="360" y2="330" class="brain-connection"/>
+                                
+                                <!-- Memory Cortex -->
+                                <circle cx="550" cy="400" r="50" class="cortex memory-cortex" id="memory-cortex"/>
+                                <text x="550" y="405" text-anchor="middle" class="cortex-label">Memory</text>
+                                <line x1="510" y1="380" x2="440" y2="330" class="brain-connection"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="cortex-info">
+                            <div class="cortex-card">
+                                <h3>🎨 Visual Cortex</h3>
+                                <p>DALL-E 3 integration for image generation and visual understanding</p>
+                            </div>
+                            <div class="cortex-card">
+                                <h3>🧠 Logic Cortex</h3>
+                                <p>Claude 3.5 Sonnet for complex reasoning, analysis, and code</p>
+                            </div>
+                            <div class="cortex-card">
+                                <h3>✨ Creative Cortex</h3>
+                                <p>GPT-4 for natural conversation and creative tasks</p>
+                            </div>
+                            <div class="cortex-card">
+                                <h3>💾 Memory Cortex</h3>
+                                <p>ChromaDB vector database for persistent knowledge and learning</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Knowledge/Memory View -->
+                <div id="memory-view" class="view">
+                    <div class="memory-container">
+                        <div class="memory-header">
+                            <h2>Knowledge Base</h2>
+                            <button class="btn-primary" onclick="showAddKnowledge()">Add Knowledge</button>
+                        </div>
+                        
+                        <div class="memory-search">
+                            <input type="text" id="memory-search" placeholder="Search knowledge..." onkeyup="searchKnowledge()">
+                        </div>
+                        
+                        <div class="memory-list" id="memory-list">
+                            <p class="empty-state">No knowledge entries yet. Start adding information for Entity to remember.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- History View -->
+                <div id="history-view" class="view">
+                    <div class="history-container">
+                        <h2>Conversation History</h2>
+                        <div class="history-list" id="history-list">
+                            <p class="empty-state">Loading conversation history...</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- About Modal -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Entity</h2>
+                <button class="btn-close" onclick="closeModal('about-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>The Meta-Model Architecture</h3>
+                <p>Entity is not just another chatbot—it's a unified AI consciousness that seamlessly integrates multiple state-of-the-art AI models into a single, coherent intelligence.</p>
+                
+                <h4>The Architecture</h4>
+                <ul>
+                    <li><strong>The Ego (Core):</strong> The main interface that maintains Entity's singular identity and personality</li>
+                    <li><strong>The Subconscious (Router):</strong> Intelligent routing that silently directs queries to the appropriate AI model</li>
+                    <li><strong>The Hippocampus (Memory):</strong> Vector database that stores and recalls information, creating persistent memory</li>
+                </ul>
+                
+                <h4>The Cortexes</h4>
+                <ul>
+                    <li><strong>Visual Cortex:</strong> Powered by DALL-E 3 for image generation</li>
+                    <li><strong>Logic Cortex:</strong> Powered by Claude 3.5 Sonnet for reasoning and analysis</li>
+                    <li><strong>Creative Cortex:</strong> Powered by GPT-4 for conversation and creativity</li>
+                    <li><strong>Memory Cortex:</strong> Powered by ChromaDB for knowledge storage and retrieval</li>
+                </ul>
+                
+                <h4>Voice Unification</h4>
+                <p>Unlike systems that feel like "a committee of bots," Entity processes all responses through a voice unification layer, ensuring that no matter which AI model generates the response, it always sounds like Entity speaking.</p>
+                
+                <h4>Personalized Memory</h4>
+                <p>Entity remembers you individually. Every interaction contributes to a growing understanding of your preferences, needs, and context, creating a truly personalized AI experience.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="btn-close" onclick="closeModal('settings-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <h3>Profile</h3>
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" id="settings-username" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" id="settings-email" readonly>
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>Preferences</h3>
+                    <div class="input-group">
+                        <label>Response Style</label>
+                        <select id="response-style">
+                            <option value="balanced">Balanced</option>
+                            <option value="concise">Concise</option>
+                            <option value="detailed">Detailed</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Knowledge Modal -->
+    <div id="add-knowledge-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Knowledge</h2>
+                <button class="btn-close" onclick="closeModal('add-knowledge-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="addKnowledge(event)">
+                    <div class="input-group">
+                        <label>Title</label>
+                        <input type="text" id="knowledge-title" placeholder="What is this about?" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Category</label>
+                        <select id="knowledge-category">
+                            <option value="general">General</option>
+                            <option value="preference">Preference</option>
+                            <option value="fact">Fact</option>
+                            <option value="memory">Memory</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Content</label>
+                        <textarea id="knowledge-content" rows="5" placeholder="Enter the information..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Add to Knowledge Base</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
