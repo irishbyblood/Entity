@@ -370,7 +370,7 @@ function exportChat() {
     const messages = document.querySelectorAll('.message');
     let exportText = 'Entity Conversation Export\n';
     exportText += `Date: ${new Date().toLocaleString()}\n`;
-    exportText += '=' .repeat(50) + '\n\n';
+    exportText += '='.repeat(50) + '\n\n';
     
     messages.forEach(msg => {
         const sender = msg.classList.contains('user') ? 'You' : 'Entity';
