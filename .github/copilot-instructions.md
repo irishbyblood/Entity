@@ -157,7 +157,7 @@ Currently, Entity uses manual testing. Test files:
 - Use `pytest` for Python tests
 - Test API endpoints with FastAPI TestClient
 - Mock external API calls (OpenAI, Anthropic, etc.)
-- Test database operations with in-memory SQLite
+- Test database operations (consider using in-memory SQLite for test isolation)
 
 ## Building and Running
 
@@ -245,12 +245,12 @@ npx serve .
 
 ## Important Files
 
-- `entity.py` (623 lines) - Core AI brain with Meta-Model architecture
-- `api.py` (477 lines) - FastAPI REST API with all endpoints
-- `database.py` (145 lines) - SQLAlchemy models and database setup
-- `index.html` (558 lines) - Frontend structure
-- `styles.css` (1,054 lines) - Glassmorphic UI styling
-- `script.js` (758 lines) - Frontend interactivity and API communication
+- `entity.py` (547 lines) - Core AI brain with Meta-Model architecture
+- `api.py` (491 lines) - FastAPI REST API with all endpoints
+- `database.py` (122 lines) - SQLAlchemy models and database setup
+- `index.html` (386 lines) - Frontend structure
+- `styles.css` (1,109 lines) - Glassmorphic UI styling
+- `script.js` (723 lines) - Frontend interactivity and API communication
 - `requirements.txt` - Python dependencies
 - `.env.example` - Configuration template
 
