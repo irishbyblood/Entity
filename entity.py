@@ -7,8 +7,13 @@ that orchestrates multiple AI systems as "lobes" of a single consciousness.
 
 import os
 import json
+import warnings
 from typing import Dict, List, Optional, Any
 from datetime import datetime
+
+# Suppress FutureWarning for google.generativeai package
+warnings.filterwarnings('ignore', category=FutureWarning)
+
 import anthropic
 import openai
 from openai import OpenAI
