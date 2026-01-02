@@ -14,10 +14,10 @@ import anthropic
 import openai
 from openai import OpenAI
 
-# Suppress FutureWarning only for google.generativeai import
-warnings.simplefilter('ignore', FutureWarning)
-import google.generativeai as genai
-warnings.simplefilter('default', FutureWarning)
+# Suppress FutureWarning only for google.generativeai import using context manager
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore', FutureWarning)
+    import google.generativeai as genai
 
 try:
     import chromadb
