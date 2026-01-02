@@ -11,13 +11,16 @@ import warnings
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 
-# Suppress FutureWarning for google.generativeai package
-warnings.filterwarnings('ignore', category=FutureWarning)
+# Suppress FutureWarning from google.generativeai package deprecation notice
+warnings.simplefilter('ignore', FutureWarning)
 
 import anthropic
 import openai
 from openai import OpenAI
 import google.generativeai as genai
+
+# Re-enable FutureWarnings after importing google.generativeai
+warnings.simplefilter('default', FutureWarning)
 
 try:
     import chromadb
