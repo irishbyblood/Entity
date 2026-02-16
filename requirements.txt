@@ -32,5 +32,4 @@ pydantic-settings>=2.1.0
 aiofiles>=23.2.1
 
 # CORS and middleware
-python-cors>=1.0.0
 starlette>=0.36.0
