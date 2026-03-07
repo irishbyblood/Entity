@@ -7,12 +7,17 @@ that orchestrates multiple AI systems as "lobes" of a single consciousness.
 
 import os
 import json
+import warnings
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 import anthropic
 import openai
 from openai import OpenAI
-import google.generativeai as genai
+
+# Suppress FutureWarning only for google.generativeai import using context manager
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore', FutureWarning)
+    import google.generativeai as genai
 
 try:
     import chromadb
